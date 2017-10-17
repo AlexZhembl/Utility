@@ -33,13 +33,13 @@ public extension UIView {
 
   func makeNotHuggable(in directions: [UILayoutConstraintAxis] = [.horizontal, .vertical]) {
     directions.forEach {
-      setContentHuggingPriority(.required, for: $0)
+      setContentHuggingPriority(UILayoutPriorityRequired, for: $0)
     }
   }
 
   func makeNotCompressable(in directions: [UILayoutConstraintAxis] = [.horizontal, .vertical]) {
     directions.forEach {
-      setContentCompressionResistancePriority(.required, for: $0)
+      setContentCompressionResistancePriority(UILayoutPriorityRequired, for: $0)
     }
   }
 }

@@ -57,10 +57,10 @@ public extension String {
     guard let data = data(using: String.Encoding.utf8) else { return nil }
 
     let encoding = NSNumber(value: String.Encoding.utf8.rawValue)
-    let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-      .documentType: NSAttributedString.DocumentType.html,
-      .characterEncoding: encoding]
-    return try? NSAttributedString(data: data, options: options, documentAttributes: nil)
+    let options: [String: Any] = [
+      NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+      NSCharacterEncodingDocumentAttribute: encoding]
+    return try? NSAttributedString(data: data, options: options as [String : Any], documentAttributes: nil)
   }
 
   var plainTextFromHTML: String? {
@@ -78,13 +78,13 @@ public extension String {
   // MARK: Size rendering
 
   public func fixedWidthSize(_ fixedWidth: CGFloat, with font: UIFont) -> CGSize {
-    let string = NSAttributedString(string: self, attributes: [.font: font])
+    let string = NSAttributedString(string: self, attributes: [NSFontAttributeName: font])
     let result = string.fixedWidthSize(fixedWidth)
     return result
   }
 
   public func fixedHeightSize(_ fixedHeight: CGFloat, with font: UIFont) -> CGSize {
-    let string = NSAttributedString(string: self, attributes: [.font: font])
+    let string = NSAttributedString(string: self, attributes: [NSFontAttributeName: font])
     let result = string.fixedHeightSize(fixedHeight)
     return result
   }
@@ -93,7 +93,7 @@ public extension String {
     let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
     let boundingBox = self.boundingRect(with: constraintRect,
                                         options: [.usesFontLeading, .usesLineFragmentOrigin],
-                                        attributes: [.font: font],
+                                        attributes: [NSFontAttributeName: font],
                                         context: nil)
 
     return boundingBox.height
