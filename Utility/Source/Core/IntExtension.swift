@@ -3,7 +3,8 @@ import Foundation
 public extension Int {
 
   static func random(max: UInt32 = .max) -> Int {
-    return Int(truncatingIfNeeded: arc4random_uniform(max))
+//    return Int(truncatingIfNeeded: arc4random_uniform(max))
+    return Int(exactly: arc4random_uniform(max))!
   }
 }
 

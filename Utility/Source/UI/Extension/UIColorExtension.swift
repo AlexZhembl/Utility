@@ -143,15 +143,15 @@ public extension UIColor {
       func hue2rgb(_ p: CGFloat, _ q: CGFloat, _ t: CGFloat) -> CGFloat {
         let _t: CGFloat
         switch t {
-        case (...0): _t = t + 1.0
-        case (1...): _t = t - 1.0
+        case (-CGFloat.greatestFiniteMagnitude...0): _t = t + 1.0
+        case (1...CGFloat.greatestFiniteMagnitude): _t = t - 1.0
         default: _t = t
         }
 
         switch _t {
-        case ...(1.0 / 6.0): return p + (q - p) * 6.0 * t
-        case ...(1.0 / 2.0): return q
-        case ...(2.0 / 3.0): return p + (q - p) * (2.0 / 3.0 - t) * 6.0
+        case -CGFloat.greatestFiniteMagnitude...(1.0 / 6.0): return p + (q - p) * 6.0 * t
+        case (1.0 / 6.0)...(1.0 / 2.0): return q
+        case (1.0 / 2.0)...(2.0 / 3.0): return p + (q - p) * (2.0 / 3.0 - t) * 6.0
         default: return p
         }
       }
